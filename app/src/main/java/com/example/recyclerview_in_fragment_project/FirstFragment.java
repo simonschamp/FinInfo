@@ -37,7 +37,7 @@ public class FirstFragment extends Fragment {
     private RecyclerView recyclerView;
 
     public FirstFragment() {
-        // Required empty public constructor
+       // // Required empty public constructor
     }
 
 
@@ -67,7 +67,6 @@ public class FirstFragment extends Fragment {
         ViewCompat.setOnApplyWindowInsetsListener(view.findViewById(R.id.item), (v, insets) ->{
             Insets systemsBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemsBars.left, systemsBars.top, systemsBars.right, systemsBars.bottom);
-
             return insets;
         });
 
@@ -82,7 +81,6 @@ public class FirstFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(adapterItem);
-
         return view;
 
     }
