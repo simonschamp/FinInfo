@@ -61,9 +61,9 @@ public class WeatherDataRetriever {
 
         WeatherData weatherData = new WeatherData(
                 weatherJson.get("name").asText(),
-                weatherJson.get("weather").get(0).get("item").asText(),
+                weatherJson.get("weather").get(0).get("main").asText(),
                 weatherJson.get("weather").get(0).get("description").asText(),
-                weatherJson.get("item").get("temp").asText(),
+                weatherJson.get("main").get("temp").asText(),
                 weatherJson.get("wind").get("speed").asText()
         );
 

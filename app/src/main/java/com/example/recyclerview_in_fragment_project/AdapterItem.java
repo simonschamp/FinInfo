@@ -8,15 +8,19 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AdapterItem extends RecyclerView.Adapter<AdapterItem.ItemViewHolder> {
 
     List<String> arr;
+    ArrayList<PopulationData> populationData;
 
     public AdapterItem(List<String> arr) {
         this.arr = arr;
     }
+    public AdapterItem(ArrayList<PopulationData> populationData){
+        this.populationData = populationData;};
 
     @NonNull
     @Override
@@ -28,13 +32,15 @@ public class AdapterItem extends RecyclerView.Adapter<AdapterItem.ItemViewHolder
     @Override
     public void onBindViewHolder(@NonNull AdapterItem.ItemViewHolder holder, int position) {
         holder.txt.setText(arr.get(position));
+        holder.population.setText(populationData.get(position).toString());
 
 
     }
 
     @Override
     public int getItemCount() {
-        return arr.size();
+        //return arr.size();
+        return populationData.size();
     }
 
     class ItemViewHolder extends RecyclerView.ViewHolder{

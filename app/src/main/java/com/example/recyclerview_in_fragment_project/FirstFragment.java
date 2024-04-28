@@ -1,7 +1,6 @@
 package com.example.recyclerview_in_fragment_project;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.os.Bundle;
 
 import androidx.core.graphics.Insets;
@@ -11,6 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,7 +45,6 @@ public class FirstFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
         }
 
 
@@ -61,13 +60,23 @@ public class FirstFragment extends Fragment {
         txtWorkStatistics = view.findViewById(R.id.workStatistics);
         txtEmploymentRate = view.findViewById(R.id.employmentRate);
         editMunicipalityName = view.findViewById(R.id.editMunicipalityName);
-        btn = view.findViewById(R.id.button);
+
+        Button searchButton = view.findViewById(R.id.button);
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onSearchButtonClick(v);
+            }
+        });
 
 
-        ViewCompat.setOnApplyWindowInsetsListener(view.findViewById(R.id.item), (v, insets) ->{
+        ViewCompat.setOnApplyWindowInsetsListener(view.findViewById(R.id.main), (v, insets) ->{
             Insets systemsBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemsBars.left, systemsBars.top, systemsBars.right, systemsBars.bottom);
+
             return insets;
+
+
         });
 
         recyclerView = view.findViewById(R.id.recyclerView);
@@ -85,10 +94,7 @@ public class FirstFragment extends Fragment {
 
     }
 
-
     public void onSearchButtonClick (View view) {
-
-
         FirstFragment context = this;
         MunicipalityDataRetriever municipalityDataRetriever = new MunicipalityDataRetriever();
         WeatherDataRetriever weatherDataRetriever = new WeatherDataRetriever();
@@ -110,15 +116,20 @@ public class FirstFragment extends Fragment {
                                 WeatherData weatherData = weatherDataRetriever.getData(editMunicipalityName.getText().toString());
 
                                 // When we want to update values we got from the API to the UI, we must do it inside runOnUiThread -method
-                                
+
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
                                         String dataString = "";
                                         for (PopulationData data : municipalityDataArrayList) {
                                             dataString = dataString + data.getYear() + ": " + data.getPopulation() + "\n";
+                                            System.out.println(data.getPopulation());
+
                                         }
                                         txtPopulation.setText(dataString);
+                                        //Log.d("This is testing", dataString);
+
+
 
 
                                         String weatherDataAsString = weatherData.getName() + "\n" +
@@ -130,14 +141,18 @@ public class FirstFragment extends Fragment {
 
                                         txtWorkStatistics.setText("Workplace self-sufficiency: " + workData.getWorkplaceSelfSufficiency().toString());
                                         txtEmploymentRate.setText("Employment rate: " + workData.getEmploymentRate().toString());
+
+
                                     }
                                 });
+
                             }
 
-                            private void runOnUiThread(Runnable runnable) {
-                            }
-                        }
+                    }
         );
+    }
+
+    private void runOnUiThread(Runnable runnable) {
     }
 
 }
