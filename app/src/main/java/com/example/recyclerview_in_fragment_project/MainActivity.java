@@ -34,8 +34,8 @@ public class MainActivity extends AppCompatActivity {
         Button searchButton = findViewById(R.id.button);
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                onSearchButtonClick(v);
+            public void onClick(View view) {
+                onSearchButtonClick(view);
             }
         });
 
