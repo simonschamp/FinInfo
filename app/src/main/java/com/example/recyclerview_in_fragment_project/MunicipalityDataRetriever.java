@@ -1,5 +1,7 @@
 package com.example.recyclerview_in_fragment_project;
 
+import android.content.Context;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -37,7 +39,7 @@ public class MunicipalityDataRetriever {
         return municipalityNamesToCodesMap;
     }
 
-    public WorkData getWorkPlaceAndEmploymentRate(FirstFragment context, String municipalityName) {
+    public WorkData getWorkPlaceAndEmploymentRate(Context context, String municipalityName) {
         String code = getMunicipalityCodesMap().get(municipalityName);
 
         WorkData workData = new WorkData();
@@ -104,7 +106,7 @@ public class MunicipalityDataRetriever {
         return workData;
     }
 
-    public ArrayList<PopulationData> getPopulationData(FirstFragment context, String municipalityName) {
+    public ArrayList<PopulationData> getPopulationData(Context context, String municipalityName) {
         //System.out.println(municipalityNamesToCodesMap);
 
         String code = getMunicipalityCodesMap().get(municipalityName);
@@ -119,7 +121,7 @@ public class MunicipalityDataRetriever {
 
 
             HttpURLConnection con = connectToAPIAndSendPostRequest(objectMapper, jsonQuery, new URL("https://pxdata.stat.fi:443/PxWeb/api/v1/en/StatFin/synt/statfin_synt_pxt_12dy.px"));
-
+            System.out.println("This"  + jsonQuery.toPrettyString());
 
             try (BufferedReader br = new BufferedReader(new InputStreamReader(con.getInputStream(), "utf-8"))) {
                 StringBuilder response = new StringBuilder();
