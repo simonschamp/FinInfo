@@ -29,10 +29,9 @@ public class FirstFragment extends Fragment {
     private TextView txtWeather;
     private TextView txtWorkStatistics;
     private TextView txtEmploymentRate;
-    private TextView editMunicipalityName;
-    Button btn;
 
-    private List<String> arr;
+
+    //private List<String> arr;
     private AdapterItem adapterItem;
     private RecyclerView recyclerView;
 
@@ -48,7 +47,7 @@ public class FirstFragment extends Fragment {
     }
 
 
-    @SuppressLint("MissingInflatedId")
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -62,9 +61,13 @@ public class FirstFragment extends Fragment {
         // editMunicipalityName = view.findViewById(R.id.editMunicipalityName);
 
         MainActivity activity = (MainActivity) getActivity();
-        String dataString= activity.getPopulationData();
+       //String dataString= activity.getPopulationData();
 
-        txtPopulation.setText(dataString);
+        if(!ListMunicipalityData.getInstance().getMunicipalities().isEmpty()){
+            txtPopulation.setText(ListMunicipalityData.getInstance().getMunicipalities().get(0).cityName);
+
+        }
+
 
        /* Button searchButton = view.findViewById(R.id.button);
         searchButton.setOnClickListener(new View.OnClickListener() {
@@ -84,18 +87,35 @@ public class FirstFragment extends Fragment {
 
         });
 
-        recyclerView = view.findViewById(R.id.recyclerView);
-        arr = new ArrayList<>();
+        //recyclerView = view.findViewById(R.id.recyclerView);
+        //arr = new ArrayList<>();
 
-        for (int i = 0; i < 10; i++) {
-            //arr.add(Integer.toString(i).concat(". Nick Steven"));
-
-        }
-        adapterItem = new AdapterItem(arr);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setAdapter(adapterItem);
+       //for (int i = 0; i < 10; i++) {
+            //arr.add(Integer.toString(i).concat(". Nick Steven"));}
+        //adapterItem = new AdapterItem(arr);
+        //LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
+        //recyclerView.setLayoutManager(linearLayoutManager);
+        //recyclerView.setAdapter(adapterItem);
         return view;
+
+    }
+    public void setMunicipalityData(MunicipalityData municipalityData){
+        txtPopulation.setVisibility(View.VISIBLE);
+        //txtPopulation.setText( municipalityData.cityName);
+        String dataString = "";
+        for (PopulationData populationData: municipalityData.getPopulationData()) {
+            dataString = dataString + populationData.getYear() + ": " + populationData.getPopulation() + "\n";
+        }
+        txtPopulation.setText(dataString);
+
+        WeatherData weatherData = municipalityData.getWeatherData();
+        String weatherDataAsString = weatherData.getName() + "\n" +
+                "Weather now: " + weatherData.getMain() + "(" + weatherData.getDescription() + ")\n" +
+                "Temperature: " + weatherData.getTemperature() + "\n" +
+                "Wind speed: " + weatherData.getWindSpeed() + "\n";
+
+        txtWeather.setText(weatherDataAsString);
+
 
     }
 

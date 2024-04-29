@@ -13,19 +13,18 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class MainActivity extends AppCompatActivity {
-    Button btn;
+    
+    //MunicipalityData municipalityData;
+
     private EditText editMunicipalityName;
-
-    String dataString;
-    String wetherString;
-
-    WorkData workData;
+    
+    
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.item_view);
+        setContentView(R.layout.activity_main);
 
         editMunicipalityName = findViewById(R.id.editMunicipalityName);
 
@@ -47,6 +46,9 @@ public class MainActivity extends AppCompatActivity {
         //System.out.println("This is testing");
         FirstFragment firstFragment = new FirstFragment();
 
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerView,
+                firstFragment).commit();
+
         Context context = this;
         MunicipalityDataRetriever municipalityDataRetriever = new MunicipalityDataRetriever();
         WeatherDataRetriever weatherDataRetriever = new WeatherDataRetriever();
@@ -63,19 +65,27 @@ public class MainActivity extends AppCompatActivity {
                                     return;
                                 }
 
-                                workData = municipalityDataRetriever.getWorkPlaceAndEmploymentRate(context, editMunicipalityName.getText().toString());
+                                WorkData workData = municipalityDataRetriever.getWorkPlaceAndEmploymentRate(context, editMunicipalityName.getText().toString());
 
                                 WeatherData weatherData = weatherDataRetriever.getData(editMunicipalityName.getText().toString());
+
+                                MunicipalityData municipalityData;
+
+                                municipalityData = new MunicipalityData(municipalityDataArrayList, weatherData, workData, editMunicipalityName.getText().toString());
+                                ListMunicipalityData.getInstance().addMunicipalityToList(municipalityData);
 
                                 // When we want to update values we got from the API to the UI, we must do it inside runOnUiThread -method
 
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
+                                        System.out.println(municipalityData.cityName);
+                                        firstFragment.setMunicipalityData(municipalityData);
+                                        /*
                                         //String dataString = "";
                                         for (PopulationData data : municipalityDataArrayList) {
                                             dataString = dataString + data.getYear() + ": " + data.getPopulation() + "\n";
-                                            System.out.println(data.getPopulation());
+                                            System.out.println(data.getPopulation()); */
 
                                         }
                                         //txtPopulation.setText(dataString);
@@ -84,10 +94,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-                                        wetherString = weatherData.getName() + "\n" +
-                                                "Weather now: " + weatherData.getMain() + "(" + weatherData.getDescription() + ")\n" +
-                                                "Temperature: " + weatherData.getTemperature() + "\n" +
-                                                "Wind speed: " + weatherData.getWindSpeed() + "\n";
+
 
                                         //txtWeather.setText(weatherDataAsString);
 
@@ -95,26 +102,8 @@ public class MainActivity extends AppCompatActivity {
                                         //txtEmploymentRate.setText("Employment rate: " + workData.getEmploymentRate().toString());
 
 
-                                    }
-                                });
-
+                                    });
                             }
-
-                        }
-        );
+        });
     }
-
-public String getPopulationData(){
-        return dataString;
-}
-public String getWetherString(){
-        return wetherString;
-}
-public WorkData getWorkData(){
-        return workData;
-
-}
-
-
-
 }

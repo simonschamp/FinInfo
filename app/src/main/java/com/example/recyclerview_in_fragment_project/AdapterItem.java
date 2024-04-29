@@ -53,7 +53,6 @@ public class AdapterItem extends RecyclerView.Adapter<AdapterItem.ItemViewHolder
 
         public ItemViewHolder(@NonNull View itemView) {
             super(itemView);
-            txt = itemView.findViewById(R.id.textView);
             population = itemView.findViewById(R.id.txtPopulation);
             weather = itemView.findViewById(R.id.txtWeather);
             workStatistics = itemView.findViewById(R.id.workStatistics);

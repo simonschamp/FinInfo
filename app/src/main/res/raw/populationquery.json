@@ -1,11 +1,11 @@
-{"queryObj":{
+{
   "query": [
     {
       "code": "Alue",
       "selection": {
         "filter": "item",
         "values": [
-          "KU398"
+          "KU005"
         ]
       }
     },
@@ -22,5 +22,4 @@
   "response": {
     "format": "json-stat2"
   }
-}
 }
