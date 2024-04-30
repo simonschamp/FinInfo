@@ -58,7 +58,7 @@ public class FirstFragment extends Fragment {
         txtWeather = view.findViewById(R.id.txtWeather);
         txtWorkStatistics = view.findViewById(R.id.workStatistics);
         txtEmploymentRate = view.findViewById(R.id.employmentRate);
-        // editMunicipalityName = view.findViewById(R.id.editMunicipalityName);
+
 
         MainActivity activity = (MainActivity) getActivity();
        //String dataString= activity.getPopulationData();
@@ -68,34 +68,14 @@ public class FirstFragment extends Fragment {
 
         }
 
-
-       /* Button searchButton = view.findViewById(R.id.button);
-        searchButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onSearchButtonClick(v);
-            }
-        }); */
-
-
         ViewCompat.setOnApplyWindowInsetsListener(view.findViewById(R.id.main), (v, insets) -> {
             Insets systemsBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemsBars.left, systemsBars.top, systemsBars.right, systemsBars.bottom);
 
             return insets;
 
-
         });
 
-        //recyclerView = view.findViewById(R.id.recyclerView);
-        //arr = new ArrayList<>();
-
-       //for (int i = 0; i < 10; i++) {
-            //arr.add(Integer.toString(i).concat(". Nick Steven"));}
-        //adapterItem = new AdapterItem(arr);
-        //LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
-        //recyclerView.setLayoutManager(linearLayoutManager);
-        //recyclerView.setAdapter(adapterItem);
         return view;
 
     }
@@ -120,8 +100,6 @@ public class FirstFragment extends Fragment {
 
         txtWorkStatistics.setText("Work place self sufficiency:" + workData.getWorkplaceSelfSufficiency().toString());
         txtEmploymentRate.setText("Employment rate:" + workData.getEmploymentRate().toString());
-
-
 
     }
 
