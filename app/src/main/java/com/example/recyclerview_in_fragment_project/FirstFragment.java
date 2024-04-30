@@ -116,6 +116,12 @@ public class FirstFragment extends Fragment {
 
         txtWeather.setText(weatherDataAsString);
 
+        WorkData workData = municipalityData.workData;
+
+        txtWorkStatistics.setText("Work place self sufficiency:" + workData.getWorkplaceSelfSufficiency().toString());
+        txtEmploymentRate.setText("Employment rate:" + workData.getEmploymentRate().toString());
+
+
 
     }
 
