@@ -20,13 +20,7 @@ import java.net.URLEncoder;
 import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
-    
-    //MunicipalityData municipalityData;
-
     private EditText editMunicipalityName;
-    
-    
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,8 +28,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         editMunicipalityName = findViewById(R.id.editMunicipalityName);
-
-
 
         Button searchButton = findViewById(R.id.button);
         searchButton.setOnClickListener(new View.OnClickListener() {
@@ -50,7 +42,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
     public void onSearchButtonClick (View view) {
-        //System.out.println("This is testing");
         FirstFragment firstFragment = new FirstFragment();
 
         getSupportFragmentManager().beginTransaction().replace(R.id.fragmentContainerView,
@@ -60,7 +51,6 @@ public class MainActivity extends AppCompatActivity {
         MunicipalityDataRetriever municipalityDataRetriever = new MunicipalityDataRetriever();
         WeatherDataRetriever weatherDataRetriever = new WeatherDataRetriever();
 
-        // Here we fetch the municipality data in a background service, so that we do not disturb the UI
         ExecutorService service = Executors.newSingleThreadExecutor();
         service.execute(new Runnable() {
                             @Override
@@ -120,23 +110,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private String getFirstTwoSentencesFromHtml(String html) {
-        // Remove HTML tags
         String textOnly = html.replaceAll("\\<.*?\\>", "");
-        // Replace multiple spaces with a single space
         textOnly = textOnly.replaceAll("\\s+", " ");
 
-        // Find the first period followed by a space
         int endOfFirstSentence = textOnly.indexOf(". ");
         if (endOfFirstSentence != -1) {
-            // Find the second period followed by a space, starting from the character after the first period
             int endOfSecondSentence = textOnly.indexOf(". ", endOfFirstSentence + 2);
             if (endOfSecondSentence != -1) {
-                return textOnly.substring(0, endOfSecondSentence + 1).trim(); // Include the second period
+                return textOnly.substring(0, endOfSecondSentence + 1).trim();
             } else {
-                return textOnly.substring(0, endOfFirstSentence + 1).trim(); // Only one complete sentence available
+                return textOnly.substring(0, endOfFirstSentence + 1).trim();
             }
         } else {
-            return textOnly; // Return the whole text if no period is found
+            return textOnly;
         }
     }
 

@@ -4,13 +4,9 @@ import java.util.ArrayList;
 
 public class MunicipalityData {
     String cityName;
-
     ArrayList<PopulationData> populationData;
-
     WeatherData weatherData;
-
     WorkData workData;
-
     public MunicipalityData(ArrayList<PopulationData> populationData, WeatherData weatherData, WorkData workData, String cityName) {
         this.populationData = populationData;
         this.weatherData = weatherData;
