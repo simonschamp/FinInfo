@@ -27,3 +27,4 @@ An app, which shows you various information about Finnish cities/municipalities.
 | Data Visualization | For example, you show the change in population as graphs instead of plain numbers. | Sergei | 5 | +     |
 
 ## Class diagram
+![Class Diagram](documentation/uml_class_diagram.png)
