@@ -28,3 +28,9 @@ An app, which shows you various information about Finnish cities/municipalities.
 
 ## Class diagram
 ![Class Diagram](documentation/uml_class_diagram.png)
+
+# Authors
+Made by
+- Smirnov Sergei, sergei.smirnov@student.lut.fi
+- Simon Ihegbu, simon.ihegbu@student.lut.fi 
+
