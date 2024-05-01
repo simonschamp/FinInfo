@@ -12,6 +12,13 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+import org.json.JSONObject;
+
 public class MainActivity extends AppCompatActivity {
     
     //MunicipalityData municipalityData;
@@ -65,45 +72,72 @@ public class MainActivity extends AppCompatActivity {
                                     return;
                                 }
 
-                                WorkData workData = municipalityDataRetriever.getWorkPlaceAndEmploymentRate(context, editMunicipalityName.getText().toString());
-
-                                WeatherData weatherData = weatherDataRetriever.getData(editMunicipalityName.getText().toString());
-
+                                String cityName = editMunicipalityName.getText().toString();
+                                WorkData workData = municipalityDataRetriever.getWorkPlaceAndEmploymentRate(context, cityName);
+                                WeatherData weatherData = weatherDataRetriever.getData(cityName);
                                 MunicipalityData municipalityData;
-
-                                municipalityData = new MunicipalityData(municipalityDataArrayList, weatherData, workData, editMunicipalityName.getText().toString());
+                                municipalityData = new MunicipalityData(municipalityDataArrayList, weatherData, workData, cityName);
                                 ListMunicipalityData.getInstance().addMunicipalityToList(municipalityData);
 
-                                // When we want to update values we got from the API to the UI, we must do it inside runOnUiThread -method
+                                String wikipediaSummary = getWikipediaSummary(cityName);
 
                                 runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
                                         System.out.println(municipalityData.cityName);
                                         firstFragment.setMunicipalityData(municipalityData);
-                                        /*
-                                        //String dataString = "";
-                                        for (PopulationData data : municipalityDataArrayList) {
-                                            dataString = dataString + data.getYear() + ": " + data.getPopulation() + "\n";
-                                            System.out.println(data.getPopulation()); */
-
+                                        firstFragment.setCityInfo(wikipediaSummary);
                                         }
-                                        //txtPopulation.setText(dataString);
-                                        //Log.d("This is testing", dataString);
-
-
-
-
-
-
-                                        //txtWeather.setText(weatherDataAsString);
-
-                                        //txtWorkStatistics.setText("Workplace self-sufficiency: " + workData.getWorkplaceSelfSufficiency().toString());
-                                        //txtEmploymentRate.setText("Employment rate: " + workData.getEmploymentRate().toString());
-
-
                                     });
                             }
         });
     }
+
+    private String getWikipediaSummary(String cityName) {
+        try {
+            URL url = new URL("https://en.wikipedia.org/w/api.php?action=query&prop=extracts&exintro&titles=" + URLEncoder.encode(cityName, "UTF-8") + "&format=json");
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            String inputLine;
+            StringBuilder response = new StringBuilder();
+            while ((inputLine = reader.readLine()) != null) {
+                response.append(inputLine);
+            }
+            reader.close();
+
+            JSONObject jsonObject = new JSONObject(response.toString());
+            JSONObject pages = jsonObject.getJSONObject("query").getJSONObject("pages");
+            String pageId = pages.keys().next();  // Get the first key (page id)
+            String extract = pages.getJSONObject(pageId).getString("extract");
+
+            return getFirstTwoSentencesFromHtml(extract);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return "No information found.";
+        }
+    }
+
+    private String getFirstTwoSentencesFromHtml(String html) {
+        // Remove HTML tags
+        String textOnly = html.replaceAll("\\<.*?\\>", "");
+        // Replace multiple spaces with a single space
+        textOnly = textOnly.replaceAll("\\s+", " ");
+
+        // Find the first period followed by a space
+        int endOfFirstSentence = textOnly.indexOf(". ");
+        if (endOfFirstSentence != -1) {
+            // Find the second period followed by a space, starting from the character after the first period
+            int endOfSecondSentence = textOnly.indexOf(". ", endOfFirstSentence + 2);
+            if (endOfSecondSentence != -1) {
+                return textOnly.substring(0, endOfSecondSentence + 1).trim(); // Include the second period
+            } else {
+                return textOnly.substring(0, endOfFirstSentence + 1).trim(); // Only one complete sentence available
+            }
+        } else {
+            return textOnly; // Return the whole text if no period is found
+        }
+    }
+
 }

@@ -15,16 +15,17 @@
         android:layout_marginBottom="32dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.945"
+        app:layout_constraintHorizontal_bias="0.941"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtWeather"
-        app:layout_constraintVertical_bias="0.239" />
+        app:layout_constraintVertical_bias="0.178" />
 
     <TextView
         android:id="@+id/txtWeather"
-        android:layout_width="214dp"
-        android:layout_height="wrap_content"
+        android:layout_width="99dp"
+        android:layout_height="82dp"
         android:layout_marginTop="80dp"
+        app:layout_constraintBottom_toBottomOf="@+id/employmentRate"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.081"
         app:layout_constraintStart_toStartOf="parent"
@@ -36,10 +37,10 @@
         android:layout_height="55dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.611"
+        app:layout_constraintHorizontal_bias="0.896"
         app:layout_constraintStart_toEndOf="@+id/txtWeather"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.181" />
+        app:layout_constraintVertical_bias="0.139" />
 
     <TextView
         android:id="@+id/employmentRate"
@@ -51,6 +52,17 @@
         app:layout_constraintStart_toStartOf="@+id/workStatistics"
         app:layout_constraintTop_toBottomOf="@+id/workStatistics"
         app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/txtCityInfo"
+        android:layout_width="223dp"
+        android:layout_height="53dp"
+
+        android:layout_marginTop="80dp"
+        app:layout_constraintBottom_toTopOf="@+id/any_chart_view"
+        app:layout_constraintEnd_toStartOf="@+id/txtPopulation"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtWeather" />
 
     <com.anychart.AnyChartView
         android:id="@+id/any_chart_view"
@@ -65,11 +77,12 @@
         android:id="@+id/weatherIcon"
         android:layout_width="80dp"
         android:layout_height="74dp"
-        app:layout_constraintBottom_toTopOf="@+id/any_chart_view"
+        android:layout_marginTop="80dp"
+        android:contentDescription="Weather icon"
+        app:layout_constraintBottom_toBottomOf="@+id/txtWeather"
         app:layout_constraintEnd_toStartOf="@+id/workStatistics"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtWeather"
-        app:layout_constraintVertical_bias="0.218"
-        android:contentDescription="Weather icon"/>
+        app:layout_constraintHorizontal_bias="0.603"
+        app:layout_constraintStart_toEndOf="@+id/txtWeather"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

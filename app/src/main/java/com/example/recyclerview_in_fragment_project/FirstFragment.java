@@ -35,6 +35,7 @@ public class FirstFragment extends Fragment {
     private TextView txtWeather;
     private TextView txtWorkStatistics;
     private TextView txtEmploymentRate;
+    private TextView txtCityInfo;
     ImageView weatherIcon;
     private AdapterItem adapterItem;
     private RecyclerView recyclerView;
@@ -62,6 +63,7 @@ public class FirstFragment extends Fragment {
         txtWorkStatistics = view.findViewById(R.id.workStatistics);
         txtEmploymentRate = view.findViewById(R.id.employmentRate);
         weatherIcon = view.findViewById(R.id.weatherIcon);
+        txtCityInfo = view.findViewById(R.id.txtCityInfo);
 
         // Data visualisation
         AnyChartView anyChartView = view.findViewById(R.id.any_chart_view);
@@ -133,6 +135,12 @@ public class FirstFragment extends Fragment {
         WorkData workData = municipalityData.workData;
         txtWorkStatistics.setText("Work place self sufficiency:" + workData.getWorkplaceSelfSufficiency().toString());
         txtEmploymentRate.setText("Employment rate:" + workData.getEmploymentRate().toString());
+    }
+
+    public void setCityInfo(String info) {
+        if(txtCityInfo != null) {
+            txtCityInfo.setText(info);
+        }
     }
 
 }
