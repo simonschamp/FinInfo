@@ -20,8 +20,10 @@ An app, which shows you various information about Finnish cities/municipalities.
 | Features         | Description                                             | Person | Targeted points | Done |
 |------------------|---------------------------------------------------------|--------|-----------------|------|
 | RecyclerView     | Using RecyclerView components in listing data           | Simon  | 3               | +    |
-| Display images?  | E.g., showing different icons based on whether predictions | Sirgei | 2               | +    |
+| Display images  | E.g., showing different icons based on whether predictions | Sirgei | 2               | +    |
 | More than one data source | In addition to Statistics Finland, the app fetches data from another API and displays that | Sirgei | 3 | + |
 | More than two data sources | In addition to Statistics Finland, there are second & third data source and displayed. | Sirgei | 2 | + |
 | Fragments        | Fragments have been used in the app                     | Simon  | 4               | +    |
-| Data Visualization | For example, you show the change in population as graphs instead of plain numbers. | Sergei | 5 |      |
+| Data Visualization | For example, you show the change in population as graphs instead of plain numbers. | Sergei | 5 | +     |
+
+## Class diagram
