@@ -12,24 +12,23 @@
         android:id="@+id/txtPopulation"
         android:layout_width="136dp"
         android:layout_height="48dp"
-        android:layout_marginBottom="32dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginEnd="12dp"
+
+
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.941"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtWeather"
-        app:layout_constraintVertical_bias="0.178" />
+        app:layout_constraintTop_toBottomOf="@+id/employmentRate" />
 
     <TextView
         android:id="@+id/txtWeather"
-        android:layout_width="99dp"
-        android:layout_height="82dp"
+        android:layout_width="143dp"
+        android:layout_height="145dp"
         android:layout_marginTop="80dp"
         app:layout_constraintBottom_toBottomOf="@+id/employmentRate"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.081"
+        app:layout_constraintHorizontal_bias="0.059"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/workStatistics"
@@ -58,11 +57,12 @@
         android:layout_width="223dp"
         android:layout_height="53dp"
 
-        android:layout_marginTop="80dp"
         app:layout_constraintBottom_toTopOf="@+id/any_chart_view"
         app:layout_constraintEnd_toStartOf="@+id/txtPopulation"
+        app:layout_constraintHorizontal_bias="0.363"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtWeather" />
+        app:layout_constraintTop_toBottomOf="@+id/txtPopulation"
+        app:layout_constraintVertical_bias="0.0" />
 
     <com.anychart.AnyChartView
         android:id="@+id/any_chart_view"
@@ -75,14 +75,15 @@
 
     <ImageView
         android:id="@+id/weatherIcon"
-        android:layout_width="80dp"
-        android:layout_height="74dp"
+        android:layout_width="56dp"
+        android:layout_height="51dp"
         android:layout_marginTop="80dp"
         android:contentDescription="Weather icon"
         app:layout_constraintBottom_toBottomOf="@+id/txtWeather"
         app:layout_constraintEnd_toStartOf="@+id/workStatistics"
-        app:layout_constraintHorizontal_bias="0.603"
+        app:layout_constraintHorizontal_bias="0.352"
         app:layout_constraintStart_toEndOf="@+id/txtWeather"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
